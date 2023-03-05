@@ -33,16 +33,22 @@ Mockito.when(employeeRepository.findByName(john.getName())).thenReturn(john);
 @Mock is used to mock simple class, but in the Spring context we have @MockBean so we can mock bean objects, this difference is important because Bean Object's lifecycle is managed by spring framework instead od ourselfs 
 
 ## d)  
-This file is used to define our own paths for the database for example so we can test the actual data access being done
+This file is used to define our own paths for the database for example so we can test the actual data access being done **(To be Finished)**
 
 ## e) 
-  
+C, D and E
+This three aproaches are different in the way that they dive into testing the application.
+
+**C** would be the most basic, by mocking services and API it only tests the actual controllers
+
+**D** dives deeper, using all the real componens of the application, and so testing all the logic, making shure that the controller reacts well with the services
+
+**E** is again more complex testing the real REST API with explicit
+HTTP client creanting realitic requests 
 
 
 
-
-
-
+# 3.2
 
 
 # Notes:
