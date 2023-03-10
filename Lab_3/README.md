@@ -33,7 +33,7 @@ Mockito.when(employeeRepository.findByName(john.getName())).thenReturn(john);
 @Mock is used to mock simple class, but in the Spring context we have @MockBean so we can mock bean objects, this difference is important because Bean Object's lifecycle is managed by spring framework instead od ourselfs 
 
 ## d)  
-This file is used to define our own paths for the database for example so we can test the actual data access being done **(To be Finished)**
+ Used to configure the application properties for the integration tests, in this case is used to set up the database, username and password 
 
 ## e) 
 C, D and E
