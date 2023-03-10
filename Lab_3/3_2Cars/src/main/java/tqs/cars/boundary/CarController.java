@@ -32,9 +32,8 @@ public class CarController {
 
     @GetMapping("/cars/{id}")
     public ResponseEntity<Car> getCarById(@PathVariable(value = "id") Long carId)
-            throws ResourceNotFoundException {
-        Car car = carManagerService.getCarDetails(carId)
-                .orElseThrow(() -> new ResourceNotFoundException("Car not found for id: " + carId));
+        throws ResourceNotFoundException {
+        Car car = carManagerService.getCarDetails(carId).orElseThrow(() -> new ResourceNotFoundException("Car not found for id: " + carId));
         return ResponseEntity.ok().body(car);
     }
 

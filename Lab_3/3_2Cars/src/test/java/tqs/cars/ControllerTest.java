@@ -11,6 +11,7 @@ import tqs.cars.model.Car;
 //java Imports
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 //Spring Framework Imports
 import org.springframework.boot.test.context.SpringBootTest;
@@ -76,7 +77,7 @@ class ControllerTest {
         when( service.save(Mockito.any()) ).thenReturn(car2);
 
         mvc.perform(
-            post("/api/car").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(car2)))
+            post("/api/cars").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(car2)))
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.model", is("Model_2")))
             .andExpect(jsonPath("$.maker",is("maker_2")));
@@ -92,7 +93,7 @@ class ControllerTest {
         when( service.getAllCars()).thenReturn(allCars); 
 
         mvc.perform(
-                get("/api/car").contentType(MediaType.APPLICATION_JSON))
+                get("/api/cars").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(4)))
                 .andExpect(jsonPath("$[0].maker", is(car1.getMaker())))
@@ -104,13 +105,13 @@ class ControllerTest {
     @Test
     void Test_getCarByIdr()  throws Exception { 
   
-        when(service.getCarDetails(car1.getCarId()).get()).thenReturn(car1);
+        when(service.getCarDetails(car4.getCarId())).thenReturn(Optional.of(car4));
 
         mvc.perform(
-            get("/api/car/"+car1.getCarId()+"").contentType(MediaType.APPLICATION_JSON))
+            get("/api/cars/"+car4.getCarId()+"").contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$.maker", is(car1.getMaker())))
-            .andExpect(jsonPath("$.model", is(car1.getModel())));
+            .andExpect(jsonPath("$.maker", is(car4.getMaker())))
+            .andExpect(jsonPath("$.model", is(car4.getModel())));
        
     }
 
