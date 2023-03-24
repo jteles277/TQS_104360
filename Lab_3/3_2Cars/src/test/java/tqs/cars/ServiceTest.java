@@ -6,6 +6,8 @@ import tqs.cars.boundary.CarController;
 import tqs.cars.services.CarManagerService;
 //Model Imports
 import tqs.cars.model.Car;
+//Model Imports
+import tqs.cars.data.CarRepository;
 
 
 //java Imports
@@ -27,8 +29,7 @@ import org.springframework.http.MediaType;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 //Hamcrest Tests Imports
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo; 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 
@@ -36,6 +37,8 @@ import static org.hamcrest.Matchers.hasSize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import static org.assertj.core.api.Assertions.assertThat;
 
 //Mockito Imports
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -59,9 +62,8 @@ public class ServiceTest {
     long id_1, id_2, id_3, id_4; 
 
   
-     
-
-    List<Car> allCars = Arrays.asList(bmw, volvo, mercedes);
+    List<Car> allCars;
+ 
 
     @BeforeEach
     public void setUp() {
@@ -75,27 +77,28 @@ public class ServiceTest {
         car4 = new Car("maker_4", "Model_4");
         id_4 = 4;
 
+        allCars = Arrays.asList(car1, car2, car3, car4);
+
         car1.setCarId(id_1); 
         car2.setCarId(id_2); 
         car3.setCarId(id_3);
 
-
-
-        Mockito.when(carRepository.findById(car1.getCardId())).thenReturn(car1);
-        Mockito.when(carRepository.findById(car2.getCardId())).thenReturn(car2);
-        Mockito.when(carRepository.findById(44444444)).thenReturn(null);
-        Mockito.when(carRepository.findById(car3.getCardId())).thenReturn(car3);
-        Mockito.when(carRepository.findAll()).thenReturn(allCars); 
+        Mockito.when(carRepository.findByCarId(car1.getCarId())).thenReturn(car1);
+        Mockito.when(carRepository.findByCarId(car2.getCarId())).thenReturn(car2);
+        long l = 0;
+        Mockito.when(carRepository.findByCarId(0l)).thenReturn(null);
+        Mockito.when(carRepository.findByCarId(car3.getCarId())).thenReturn(car3);
+        Mockito.when(carRepository.findAll()).thenReturn(allCars);
+ 
     }
 
     @Test
     public void GetCarDetails(){
         
-        assertThat(carService.getCarDetails(id_1)).isEqualTo(car1);
-        assertThat(carService.getCarDetails(id_2)).isEqualTo(car2);
-
-
-        assertThat(carService.getCarDetails(44444444)).isEqualTo(null);
+        assertThat( carService.getCarDetails(id_1) ).isEqualTo(car1);
+        assertThat( carService.getCarDetails(id_2) ).isEqualTo(car2);
+ 
+        assertThat( carService.getCarDetails(0l)  ).isEqualTo(null);
 
     }
 
@@ -110,7 +113,7 @@ public class ServiceTest {
     @Test
     public void SaveCar(){ 
  
-        Mockito.when(carRepository.save(id_4)).thenReturn(car4); 
+        Mockito.when(carRepository.save(car4)).thenReturn(car4); 
 
         assertThat(carService.save(car4)).isEqualTo(car4);
 

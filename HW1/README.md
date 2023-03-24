@@ -21,11 +21,12 @@ Boundary -> Boundary Layer
 Service -> Service layer
 Connection -> External API Access 
 Data -> In-memory Cache logic
+Model -> Oroject Models    
 
          Boundary 
             |
             v
-       _ Service _
+       _ Service _     <->  Model 
       |           |
       v           v
   Connection     Data
@@ -43,3 +44,9 @@ Data -> In-memory Cache logic
 5. Create **Integation Tests** mocking the external API (using **Cucumber** and **Mockito**)
 6. Create **Functional Tests** mocking the external API (using **Selenium**)
 7. Finish code Implementation and correct all final bugs!
+
+
+
+# Notes 
+
+- Coverage will be evaluated in this HM

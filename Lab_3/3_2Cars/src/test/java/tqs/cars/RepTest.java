@@ -6,6 +6,7 @@ import tqs.cars.boundary.CarController;
 import tqs.cars.services.CarManagerService;
 //Model Imports
 import tqs.cars.model.Car;
+import tqs.cars.data.CarRepository;
 
 
 //java Imports
@@ -13,48 +14,70 @@ import java.util.Arrays;
 import java.util.List;
 
 //Spring Framework Imports
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.http.MediaType;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-//Hamcrest Tests Imports
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.hasSize;
+//AssertJ Tests Imports
+import static org.assertj.core.api.Assertions.assertThat;
 
 //Junit Imports 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
-//Mockito Imports
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito; 
-import org.mockito.junit.jupiter.MockitoExtension;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when; 
-
-@ExtendWith(MockitoExtension.class)
+  
+@DataJpaTest 
 public class RepTest {
 
    
+    // get a test-friendly Entity Manager
+    @Autowired
+    private TestEntityManager entityManager;
+
+    @Autowired
+    private CarRepository carRepository;
+
+    Car car1, car2, car3, car4;
+    long id_1, id_2, id_3, id_4; 
+    List<Car> allCars;
+
+    @BeforeEach
+    public void setUpTestCars() throws Exception {
+        car1 = new Car("maker_1", "Model_1");
+        car2 = new Car("maker_2", "Model_2");
+        car3 = new Car("maker_3", "Model_3");
+        car4 = new Car("maker_4", "Model_4");
+        allCars = Arrays.asList(car1, car2, car3, car4);  
+    } 
+
+
     @Test
-    void test() {
-         
+    void Find_By_Id() { 
+ 
+        entityManager.persistAndFlush(car1);  
+ 
+        Car found = carRepository.findByCarId(car1.getCarId());
+        assertThat( found ).isEqualTo(car1);
     }
+
+
+    @Test
+    void Get_All_Cars() {
+         
+
+        List<Car> allCars = Arrays.asList(car2,car3, car4);
+
+        entityManager.persistAndFlush(car2);  
+        entityManager.persistAndFlush(car3);  
+        entityManager.persistAndFlush(car4);  
+
+        List<Car> found = carRepository.findAll();
+        assertThat( found ).isEqualTo(allCars);
+
+
+
+    }
+
 
 }
 
+ 
