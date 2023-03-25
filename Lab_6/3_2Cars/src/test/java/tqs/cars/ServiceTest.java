@@ -6,6 +6,7 @@ import tqs.cars.boundary.CarController;
 import tqs.cars.services.CarManagerService;
 //Model Imports
 import tqs.cars.model.Car;
+import tqs.cars.model.CarDTO;
 //Model Imports
 import tqs.cars.data.CarRepository;
 
@@ -59,6 +60,7 @@ public class ServiceTest {
     @InjectMocks
     private CarManagerService carService;
     Car car1, car2, car3, car4;
+    CarDTO car1_dto, car2_dto, car3_dto, car4_dto;
     long id_1, id_2, id_3, id_4; 
 
   
@@ -76,6 +78,11 @@ public class ServiceTest {
         id_3 = 3;
         car4 = new Car("maker_4", "Model_4");
         id_4 = 4;
+
+        car1_dto = new CarDTO("maker_1", "Model_1");
+        car2_dto = new CarDTO("maker_2", "Model_2");
+        car3_dto = new CarDTO("maker_3", "Model_3");
+        car4_dto = new CarDTO("maker_4", "Model_4");
 
         allCars = Arrays.asList(car1, car2, car3, car4);
 

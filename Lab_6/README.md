@@ -25,5 +25,24 @@ From this 29 we can take the 12 major ones, and they end up falling into three c
 
 All of this problems are easily fixed just by either using the log/JunitAssertions the way they are inttended or by correcting basic good principles in coding(loop example)
 
+# 6.2
 
+## a)
+![#as](images/Tech_Deb.png)
+ Technical Debt is a measure of compromise in the quality of code done to make up for quick delivery schedules
+
+## d)
+![#as](images/Coverage.png)
+
+# 6.3
+## a)
+![#as](images/Quality_Gate.png)
+## b)
+I dont think is necessary to add any code smells given the fact that it is already full of them.
+
+This IES Project was made without the use of any tests or automatic analysis in a really short timespam, so it is completely flawed from a technical point of view.
+
+This analysis just serves to prove how important testing/analysis is to developing a secure and well strustured application.
+
+![#as](images/IES.png)
 

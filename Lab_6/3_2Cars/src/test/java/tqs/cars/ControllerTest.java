@@ -6,6 +6,7 @@ import tqs.cars.boundary.CarController;
 import tqs.cars.services.CarManagerService;
 //Model Imports
 import tqs.cars.model.Car;
+import tqs.cars.model.CarDTO;
 
 
 //java Imports
@@ -54,6 +55,7 @@ class ControllerTest {
      
      
     Car car1, car2, car3, car4;
+    CarDTO car1_dto, car2_dto, car3_dto, car4_dto;
     CarController controller;
 
     @MockBean
@@ -64,6 +66,10 @@ class ControllerTest {
 
     @BeforeEach
     public void setUpTestCars() throws Exception {
+        car1_dto = new CarDTO("maker_1", "Model_1");
+        car2_dto = new CarDTO("maker_2", "Model_2");
+        car3_dto = new CarDTO("maker_3", "Model_3");
+        car4_dto = new CarDTO("maker_4", "Model_4");
         car1 = new Car("maker_1", "Model_1");
         car2 = new Car("maker_2", "Model_2");
         car3 = new Car("maker_3", "Model_3");
@@ -77,7 +83,7 @@ class ControllerTest {
         when( service.save(Mockito.any()) ).thenReturn(car2);
 
         mvc.perform(
-            post("/api/cars").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(car2)))
+            post("/api/cars").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(car2_dto)))
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.model", is("Model_2")))
             .andExpect(jsonPath("$.maker",is("maker_2")));

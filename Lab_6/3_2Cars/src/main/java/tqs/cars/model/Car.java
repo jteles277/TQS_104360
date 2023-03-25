@@ -36,7 +36,7 @@ public class Car {
         
         Car car = (Car) o;
 
-        return carId.equals(car.carId) && Objects.equals(maker, car.maker) && Objects.equals(model, car.model);
+        return Objects.equals(maker, car.maker) && Objects.equals(model, car.model);
     }
 
     @Override

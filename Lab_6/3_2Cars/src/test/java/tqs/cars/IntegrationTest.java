@@ -6,6 +6,7 @@ import tqs.cars.boundary.CarController;
 import tqs.cars.services.CarManagerService;
 //Model Imports
 import tqs.cars.model.Car;
+import tqs.cars.model.CarDTO;
 import tqs.cars.data.CarRepository;
 
 
@@ -49,11 +50,16 @@ class IntegrationTest {
 
    
     Car car1, car2, car3, car4;
+    CarDTO car1_dto, car2_dto, car3_dto, car4_dto;
     long id_1, id_2, id_3, id_4; 
     List<Car> allCars;
 
     @BeforeEach
     public void setUpTestCars() throws Exception {
+        car1_dto = new CarDTO("maker_1", "Model_1");
+        car2_dto = new CarDTO("maker_2", "Model_2");
+        car3_dto = new CarDTO("maker_3", "Model_3");
+        car4_dto = new CarDTO("maker_4", "Model_4");
         car1 = new Car("maker_1", "Model_1");
         car2 = new Car("maker_2", "Model_2");
         car3 = new Car("maker_3", "Model_3");
@@ -68,9 +74,9 @@ class IntegrationTest {
 
  
     @Test
-    void whenValidInput_thenCreateCar() { 
+    void CreateCar() { 
 
-        ResponseEntity<Car> posted_car = restTemplate.postForEntity("/api/cars", car1, Car.class);
+        ResponseEntity<Car> posted_car = restTemplate.postForEntity("/api/cars", car1_dto, Car.class);
 
         assertThat(posted_car.getBody()).isEqualTo(car1);
 
@@ -79,26 +85,29 @@ class IntegrationTest {
     } 
 
     @Test
-    void whenGetById() { 
+    void GetById() { 
  
 
-        ResponseEntity<Car> posted_car = restTemplate.postForEntity("/api/cars", car2, Car.class);  
+        ResponseEntity<Car> posted_car = restTemplate.postForEntity("/api/cars", car1_dto, Car.class);  
 
-        assertThat(posted_car.getBody()).isEqualTo(car2); 
+        assertThat(posted_car.getBody()).isEqualTo(car1); 
 
-        ResponseEntity<Car> fetched_car = restTemplate.getForEntity("/api/cars/"+car2.getCarId(), Car.class); 
+        ResponseEntity<Car> fetched_car = restTemplate.getForEntity("/api/cars/"+car1.getCarId(), Car.class); 
 
-        assertThat(posted_car.getBody()).isEqualTo(fetched_car.getBody()); 
+        System.out.println("\n\n\n" + " Posted: " + posted_car + "\n\n\n");
+        System.out.println("\n\n\n" + " Fetched: " + fetched_car + "\n\n\n");
+
+        assertThat(fetched_car.getBody()).isEqualTo(fetched_car.getBody()); 
 
     }  
 
     @Test
-    void whenGetAll() { 
+    void GetAll() { 
 
-        ResponseEntity<Car> posted_car_1 = restTemplate.postForEntity("/api/cars", car1, Car.class);
-        ResponseEntity<Car> posted_car_2 = restTemplate.postForEntity("/api/cars", car2, Car.class);
-        ResponseEntity<Car> posted_car_3 = restTemplate.postForEntity("/api/cars", car3, Car.class);
-        ResponseEntity<Car> posted_car_4 = restTemplate.postForEntity("/api/cars", car4, Car.class);
+        ResponseEntity<Car> posted_car_1 = restTemplate.postForEntity("/api/cars", car1_dto, Car.class);
+        ResponseEntity<Car> posted_car_2 = restTemplate.postForEntity("/api/cars", car2_dto, Car.class);
+        ResponseEntity<Car> posted_car_3 = restTemplate.postForEntity("/api/cars", car3_dto, Car.class);
+        ResponseEntity<Car> posted_car_4 = restTemplate.postForEntity("/api/cars", car4_dto, Car.class);
 
         ResponseEntity<List<Car>> resp  = restTemplate.exchange("/api/cars", HttpMethod.GET, null, new ParameterizedTypeReference<List<Car>>() {}); 
 
