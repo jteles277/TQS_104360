@@ -42,7 +42,7 @@ I dont think is necessary to add any code smells given the fact that it is alrea
 
 This IES Project was made without the use of any tests or automatic analysis in a really short timespam, so it is completely flawed from a technical point of view.
 
-This analysis just serves to prove how important testing/analysis is to developing a secure and well strustured application.
+This analysis just serves to prove how important testing/analysis is to developing a secure and well strutured application.
 
 ![#as](images/IES.png)
 
