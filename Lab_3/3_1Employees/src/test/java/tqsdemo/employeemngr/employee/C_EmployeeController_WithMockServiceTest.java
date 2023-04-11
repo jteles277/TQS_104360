@@ -49,7 +49,7 @@ class C_EmployeeController_WithMockServiceTest {
     void whenPostEmployee_thenCreateEmployee( ) throws Exception {
         Employee alex = new Employee("alex", "alex@deti.com");
 
-        when( service.save(Mockito.any()) ).thenReturn( alex);
+        when( service.save(Mockito.any()) ).thenReturn(alex);
 
         mvc.perform(
                 post("/api/employees").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(alex)))

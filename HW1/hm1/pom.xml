@@ -72,6 +72,18 @@
       <version>4.5.13</version>
     </dependency>
 
+    <!-- json tools -->
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <dependency>            
+      <groupId>org.json</groupId>            
+      <artifactId>json</artifactId>            
+      <version>20220924</version>        
+    </dependency>
+
     <!-- Hamcrest assertions library  -->
     <dependency>
       <groupId>org.hamcrest</groupId>
@@ -93,6 +105,26 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+
+    <!-- Redis -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+      <version>3.0.4</version>
+    </dependency> 
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>4.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.github.bonigarcia</groupId>
+        <artifactId>selenium-jupiter</artifactId>
+        <version>4.3.3</version>
+        <scope>test</scope>
     </dependency>
 
   </dependencies>

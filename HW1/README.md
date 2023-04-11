@@ -50,3 +50,4 @@ Model -> Oroject Models
 # Notes 
 
 - Coverage will be evaluated in this HM
+- Use Github actions with sonar, to havve mcontinuous integration

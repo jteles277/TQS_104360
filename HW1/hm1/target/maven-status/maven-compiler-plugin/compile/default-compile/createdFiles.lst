@@ -1,3 +1,9 @@
-hm1/AirQualityApplication.class
+hm1/data/Quality_Info.class
 hm1/boundary/Controller.class
+hm1/data/Statistics.class
+hm1/connection/ConfigUtils.class
+hm1/service/AirService.class
+hm1/data/MyRepository.class
+hm1/AirQualityApplication.class
+hm1/data/RedisConfiguration.class
 hm1/connection/BasicHttpClient.class
